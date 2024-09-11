@@ -1,3 +1,19 @@
 @URL= http://localhost:8000/
 
+### Get request
 GET {{URL}}
+
+
+### User Router
+### Get Request
+GET  {{URL}}api/v1/users/
+
+### Create User/ Post Request
+POST {{URL}}api/v1/users/
+Content-Type: application/json
+
+{
+    "name":"Gyanendra",
+    "email":"gyanen56@gmail.com",
+    "password":"1234"
+}
