@@ -1,15 +1,17 @@
 import express from "express";
-import { insertUser } from "../models/UserModel.js";
-import { hashPassword } from '../utils/bcryptjs.js'
+import { insertUser, loginUser } from "../models/UserModel.js";
+import { checkPassword, hashPassword } from '../utils/bcryptjs.js'
 const router = express.Router()
 
 
 router.get("/",(req,res)=>{
+ 
  res.json({
     status:"success",
     message:"user details"
  })
 })
+
 router.post("/", async (req,res,next)=>{
    // password encryption
    
@@ -44,6 +46,44 @@ router.post("/", async (req,res,next)=>{
         })
    }
    
+})
+
+// login 
+router.post("/login", async (req,res)=>{
+   try {
+    const { email, password } = req.body
+      if(email && password){
+        const result = await loginUser(email)
+        
+        // check user exist with given email.
+        if (result?._id) {
+          console.log(result?._id)
+          // compare password with bcrypt to authenticate user
+          const match = checkPassword(password, result.password)
+          console.log('match', match)
+          result.password = undefined
+          if (match) {
+            // authenticated user
+            console.log('authenticated user')
+            return res.status(200).json({
+              message: 'Login Successful',
+              user: result,
+            })
+          }
+        }
+      }
+    
+
+    return res.status(401).json({
+      error:"Invalid email or password"
+     
+    })
+    
+   } catch (error) {
+    res.status(500).json({
+      error:error.message
+    })
+   }
 })
 
 
