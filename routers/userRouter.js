@@ -1,6 +1,7 @@
 import express from "express";
 import { insertUser, loginUser } from "../models/UserModel.js";
 import { checkPassword, hashPassword } from '../utils/bcryptjs.js'
+import { jwtToken } from "../utils/jwt.js";
 const router = express.Router()
 
 
@@ -64,7 +65,10 @@ router.post("/login", async (req,res)=>{
           result.password = undefined
           if (match) {
             // authenticated user
-            console.log('authenticated user')
+
+            // creating JWT for authenticated user
+            const accessJWT = jwtToken({ email: email })
+            console.log(accessJWT)
             return res.status(200).json({
               message: 'Login Successful',
               user: result,

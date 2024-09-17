@@ -27,3 +27,13 @@ http://localhost:8000/api/v1/users/
 ### user password Hashing 
 * install bcrypt
 A library to help you hash passwords.
+
+### using JWT token for authorization 
+JSON Web Tokens consist of three parts separated by dots (.),
+ which are:
+Header
+Payload
+Signature
+```
+yarn add  jsonwebtoken
+```
