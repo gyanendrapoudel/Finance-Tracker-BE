@@ -61,14 +61,16 @@ router.post("/login", async (req,res)=>{
           console.log(result?._id)
           // compare password with bcrypt to authenticate user
           const match = checkPassword(password, result.password)
-          console.log('match', match)
-          result.password = undefined
-          if (match) {
-            // authenticated user
 
-            // creating JWT for authenticated user
+          result.password = undefined  
+          // sending response without password, when property is undefined 
+          // json will ignore that property  
+          if (match) {
+            // when users comes here, they are authenticated users
+
+            // creating JWT Token for authenticated user using JWT
             const accessJWT = jwtToken({ email: email })
-            console.log(accessJWT)
+            
             return res.status(200).json({
               message: 'Login Successful',
               user: result,

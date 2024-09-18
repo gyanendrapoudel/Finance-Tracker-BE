@@ -2,6 +2,8 @@
 
 ### Environment variables
 * Install dotenv
+* Database connection string( MONGO_URI) and JWT secret key(JWT_SECRET )
+example
 In dbConfig.js
 ``` 
 process('dotenv').config()
@@ -37,3 +39,4 @@ Signature
 ```
 yarn add  jsonwebtoken
 ```
+
