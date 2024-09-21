@@ -7,8 +7,9 @@ GET {{URL}}
 ### User Router
 ### Get Request
 GET  {{URL}}api/v1/users/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd5YW5lbjU2QGdtYWlsLmNvbSIsImlhdCI6MTcyNjkxOTA1NCwiZXhwIjoxNzI2OTE5MTE0fQ.rr6Z8X28EaBVkE_T2TGu_Sext55tpTfzHpjKgfSBcQk
 
-### Create User/ Post Request
+### create user
 POST {{URL}}api/v1/users/
 Content-Type: application/json
 

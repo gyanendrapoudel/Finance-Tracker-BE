@@ -2,15 +2,26 @@ import express from "express";
 import { insertUser, loginUser } from "../models/UserModel.js";
 import { checkPassword, hashPassword } from '../utils/bcryptjs.js'
 import { jwtToken } from "../utils/jwt.js";
+import { auth } from "../middleware/auth.js";
+
 const router = express.Router()
 
 
-router.get("/",(req,res)=>{
+router.get("/", auth,(req,res,next)=>{
  
- res.json({
-    status:"success",
-    message:"user details"
- })
+ try {
+    const user = req.userInfo
+    console.log("userinfo", user)
+  res.json({
+    status: 'success',
+    message: 'user details',
+
+  })
+ } catch (error) {
+  res.status(500).send({
+    error:error.message
+  })
+ }
 })
 
 router.post("/", async (req,res,next)=>{
@@ -74,6 +85,8 @@ router.post("/login", async (req,res)=>{
             return res.status(200).json({
               message: 'Login Successful',
               user: result,
+              status:"success",
+              accessJWT
             })
           }
         }
@@ -81,13 +94,15 @@ router.post("/login", async (req,res)=>{
     
 
     return res.status(401).json({
-      error:"Invalid email or password"
+      error:"Invalid email or password",
+      
      
     })
     
    } catch (error) {
     res.status(500).json({
-      error:error.message
+      error:error.message,
+      
     })
    }
 })
