@@ -1,6 +1,7 @@
 import express from 'express'
 import { mongoConnection } from './config/dbConfig.js'
 import userRouter from './routers/userRouter.js'
+import transactionRouter from './routers/transactionRouter.js'
 import cors from 'cors'
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -18,7 +19,10 @@ app.get("/",(req,res)=>{
 })
 
 // user Router
-app.use("/api/v1/users", userRouter)
+app.use('/api/v1/users', userRouter)
+// transaction router
+app.use("/api/v1/transactions", transactionRouter)
+
 
 app.listen(PORT, (error)=>{
     error ? console.log('Error',error) : console.log(`Port is running on ${PORT}`)

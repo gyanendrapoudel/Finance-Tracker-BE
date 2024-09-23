@@ -27,3 +27,7 @@ Content-Type: application/json
     "email":"gyanen56@gmail.com",
     "password":"1234"
 }
+
+
+### Transaction 
+POST {{URL}}api/v1/transactions
