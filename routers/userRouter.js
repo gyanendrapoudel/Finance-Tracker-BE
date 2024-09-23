@@ -2,7 +2,8 @@ import express from "express";
 import { insertUser, loginUser } from "../models/UserModel.js";
 import { checkPassword, hashPassword } from '../utils/bcryptjs.js'
 import { jwtToken } from "../utils/jwt.js";
-import { auth } from "../middleware/auth.js";
+import { auth } from "../middleware/Auth.js";
+
 
 const router = express.Router()
 
@@ -11,11 +12,11 @@ router.get("/", auth,(req,res,next)=>{
  
  try {
     const user = req.userInfo
-    console.log("userinfo", user)
+    
   res.json({
     status: 'success',
     message: 'user details',
-
+    user
   })
  } catch (error) {
   res.status(500).send({
