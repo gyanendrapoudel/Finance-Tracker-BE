@@ -1,15 +1,19 @@
 import express from "express"
+import { insertTransaction } from "../models/TransactionModel.js"
 
 
 const router = express.Router()
 
 
-router.post("/",(req,res,next)=>{
+router.post("/", async(req,res,next)=>{
     try {
-        console.log("transaction")
+         const transaction = req.body
+         
+         const result = await insertTransaction(transaction)
         res.json({
             status:"success",
-            message:"transactions created "
+            message:"transactions created ",
+            transaction:transaction
         })
 
     } catch (error) {
