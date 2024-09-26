@@ -31,3 +31,12 @@ Content-Type: application/json
 
 ### Transaction 
 POST {{URL}}api/v1/transactions
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd5YW5lbjU2QGdtYWlsLmNvbSIsImlhdCI6MTcyNzMzNDQ3NSwiZXhwIjoxNzI3NDIwODc1fQ.N00qyblm7ksIrJwLKNCcOYqmaEwP9qTKKBo-pN9sy7Q 
+Content-Type: application/json
+
+{
+    "amount": "grocery",
+    "tDate": "2024-09-25",
+    "tType": "income",
+    "title": "amount "
+}

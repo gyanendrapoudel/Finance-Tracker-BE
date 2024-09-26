@@ -5,7 +5,7 @@ const transactionSchema = mongoose.Schema(
   {
     tType: {
         type:"string",
-      enum: ['income', 'expenses'],
+       enum: ['income', 'expenses'],
       required: true,
     },
     title: {
@@ -20,6 +20,12 @@ const transactionSchema = mongoose.Schema(
       type: Date,
       required: true,
     },
+    userId :{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User",
+            required:true
+    }
+    
   },
   {
     timestamps: true,

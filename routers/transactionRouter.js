@@ -5,16 +5,27 @@ import { insertTransaction } from "../models/TransactionModel.js"
 const router = express.Router()
 
 
-router.post("/", async(req,res,next)=>{
+router.post("/", async (req,res,next)=>{
     try {
-         const transaction = req.body
-         
+         let transaction = req.body
+        //  getting user form auth.js
+         const user = req.userInfo
+         const {_id} = user
+         transaction.userId = _id
+         console.log(transaction)
          const result = await insertTransaction(transaction)
-        res.json({
-            status:"success",
-            message:"transactions created ",
-            transaction:transaction
-        })
+         console.log(result)
+         result?._id
+           ? res.json({
+               status: 'success',
+               message: 'transactions created ',
+               transaction: transaction,
+             })
+           : res.json({
+               status: 'error',
+               message: 'Unable to create a transaction ',
+               transaction: transaction,
+             })
 
     } catch (error) {
         
