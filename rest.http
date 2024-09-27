@@ -40,3 +40,8 @@ Content-Type: application/json
     "tType": "income",
     "title": "amount "
 }
+
+### get all Transactions
+GET {{URL}}api/v1/transactions
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd5YW5lbjU2QGdtYWlsLmNvbSIsImlhdCI6MTcyNzMzNDQ3NSwiZXhwIjoxNzI3NDIwODc1fQ.N00qyblm7ksIrJwLKNCcOYqmaEwP9qTKKBo-pN9sy7Q 
+Content-Type: application/json

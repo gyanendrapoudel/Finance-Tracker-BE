@@ -1,3 +1,4 @@
+import e from 'express'
 import TransactionSchema from './TransactionSchema.js'
 
 
@@ -6,4 +7,10 @@ import TransactionSchema from './TransactionSchema.js'
 export const insertTransaction = (transaction)=>{
     
     return  TransactionSchema(transaction).save()
+}
+
+// get all transaction  using userId
+
+export const getTransaction = (userId)=>{
+    return TransactionSchema.find(userId)
 }

@@ -1,5 +1,5 @@
 import express from "express"
-import { insertTransaction } from "../models/TransactionModel.js"
+import { getTransaction, insertTransaction } from "../models/TransactionModel.js"
 
 
 const router = express.Router()
@@ -28,8 +28,33 @@ router.post("/", async (req,res,next)=>{
              })
 
     } catch (error) {
-        
+        res.json({
+          status: 'error',
+          message: error.message,
+        })
     }
+})
+
+router.get("/", async (req,res,next)=>{
+    try {
+        const userInfo = req.userInfo
+        const { userId } = userInfo
+        const result =  await getTransaction(userId)
+        result?.length>0?res.json({
+            status:"success",
+            message:"All transactions",
+            transactions:result
+        }):res.json({
+            status:"error",
+            message:"Unable to get transaction"
+        })
+    } catch (error) {
+        res.json({
+          status: 'error',
+          message: error.message,
+        })
+    }
+
 })
 
 export default router
