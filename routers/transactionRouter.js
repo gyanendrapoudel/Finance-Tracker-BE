@@ -1,5 +1,6 @@
 import express from "express"
-import { getTransaction, insertTransaction } from "../models/TransactionModel.js"
+import { deleteTransaction, getTransaction, insertTransaction } from "../models/TransactionModel.js"
+import { auth } from "../middleware/Auth.js"
 
 
 const router = express.Router()
@@ -35,7 +36,7 @@ router.post("/", async (req,res,next)=>{
     }
 })
 
-router.get("/", async (req,res,next)=>{
+router.get("/",  async (req,res,next)=>{
     try {
         const userInfo = req.userInfo
         const { userId } = userInfo
@@ -55,6 +56,27 @@ router.get("/", async (req,res,next)=>{
         })
     }
 
+})
+
+router.delete("/", auth, async(req,res)=>{
+  try {
+    const userId = req.userInfo._id
+    const transIds = req.body.ids
+    const { deletedCount } = await deleteTransaction(userId, transIds)
+    deletedCount>0?res.json({
+      status:"success",
+      message:`${deletedCount} transaction has been deleted !`
+    }):res.json({
+      status:"error",
+      message:"Unable to delete any transaction"
+    })
+  } catch (error) {
+    
+    res.json({
+      status:"error",
+      message:error.message
+    })
+  }
 })
 
 export default router

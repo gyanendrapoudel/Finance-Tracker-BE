@@ -43,5 +43,15 @@ Content-Type: application/json
 
 ### get all Transactions
 GET {{URL}}api/v1/transactions
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd5YW5lbjU2QGdtYWlsLmNvbSIsImlhdCI6MTcyNzMzNDQ3NSwiZXhwIjoxNzI3NDIwODc1fQ.N00qyblm7ksIrJwLKNCcOYqmaEwP9qTKKBo-pN9sy7Q 
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd5YW5lbjU2QGdtYWlsLmNvbSIsImlhdCI6MTczMjU3NDk4NiwiZXhwIjoxNzMyNjYxMzg2fQ.MF1-V6GyHvxuAfs5YwE15Q1ezsyHuAl6kPnlJUQgO68
 Content-Type: application/json
+
+### delete one or many Transactions
+
+DELETE {{URL}}api/v1/transactions
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd5YW5lbjU2QGdtYWlsLmNvbSIsImlhdCI6MTczMjU3NDk4NiwiZXhwIjoxNzMyNjYxMzg2fQ.MF1-V6GyHvxuAfs5YwE15Q1ezsyHuAl6kPnlJUQgO68
+Content-Type: application/json
+
+{
+   "ids": ["6745086cb66582de54775649","67450879b66582de5477564e"]
+}

@@ -14,3 +14,9 @@ export const insertTransaction = (transaction)=>{
 export const getTransaction = (userId)=>{
     return TransactionSchema.find(userId)
 }
+
+// delete one or many transactions using userId and transactions ids
+
+export const deleteTransaction = (userId, transIds) => {
+  return TransactionSchema.deleteMany({userId ,  _id: { $in: transIds}})
+}
