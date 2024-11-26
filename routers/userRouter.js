@@ -19,9 +19,7 @@ router.get("/", auth,(req,res,next)=>{
     user
   })
  } catch (error) {
-  res.status(500).send({
-    error:error.message
-  })
+  next(error)
  }
 })
 
@@ -34,6 +32,7 @@ router.post("/", async (req,res,next)=>{
    console.log('after hashing ', req.body.password)
     
    try {
+      
       const result = await insertUser(req.body)
       result?.id
         ? res.json({
@@ -45,25 +44,24 @@ router.post("/", async (req,res,next)=>{
             message: 'Unable to create user, try again later',
           })
    } catch (error) {
-      let msg =error.message
+  
       if (
-        msg.includes(
+        error.message.includes(
           'E11000 duplicate key error collection: FinaceTracker.users index: email_1 dup key:'
         )
-      ){
-         msg = "User already exist. Please Login"
+      ) {
+           error.message = 'User already exist. Please Login'
       }
-        res.json({
-          status: 'error',
-          message: msg,
-        })
+      error.statusCode = 200
+        next(error)
    }
    
 })
 
 // login 
-router.post("/login", async (req,res)=>{
+router.post("/login", async (req,res,next)=>{
    try {
+   
     const { email, password } = req.body
       if(email && password){
         const result = await loginUser(email)
@@ -101,10 +99,7 @@ router.post("/login", async (req,res)=>{
     })
     
    } catch (error) {
-    res.status(500).json({
-      error:error.message,
-      
-    })
+    next(error)
    }
 })
 

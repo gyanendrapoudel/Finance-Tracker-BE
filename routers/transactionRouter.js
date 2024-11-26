@@ -29,10 +29,7 @@ router.post("/", async (req,res,next)=>{
              })
 
     } catch (error) {
-        res.json({
-          status: 'error',
-          message: error.message,
-        })
+       next(error)
     }
 })
 
@@ -50,18 +47,16 @@ router.get("/",  async (req,res,next)=>{
             message:"Unable to get transaction"
         })
     } catch (error) {
-        res.json({
-          status: 'error',
-          message: error.message,
-        })
+        next(error)
     }
 
 })
 
-router.delete("/", auth, async(req,res)=>{
+router.delete("/", auth, async(req,res,next)=>{
   try {
     const userId = req.userInfo._id
-    const transIds = req.body.ids
+    console.log(req.body)
+    const transIds = req.body
     const { deletedCount } = await deleteTransaction(userId, transIds)
     deletedCount>0?res.json({
       status:"success",
@@ -72,10 +67,7 @@ router.delete("/", auth, async(req,res)=>{
     })
   } catch (error) {
     
-    res.json({
-      status:"error",
-      message:error.message
-    })
+    next(error)
   }
 })
 
