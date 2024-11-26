@@ -68,7 +68,6 @@ router.post("/login", async (req,res,next)=>{
         
         // check user exist with given email.
         if (result?._id) {
-          console.log(result?._id)
           // compare password with bcrypt to authenticate user
           const match = checkPassword(password, result.password)
 
