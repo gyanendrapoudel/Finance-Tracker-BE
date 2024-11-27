@@ -3,7 +3,7 @@ import { mongoConnection } from './config/dbConfig.js'
 import userRouter from './routers/userRouter.js'
 import transactionRouter from './routers/transactionRouter.js'
 import cors from 'cors'
-import { auth } from './middleware/Auth.js'
+import { auth } from './middleware/auth.js'
 import { globalErrorHandler } from './middleware/globalErrorHandler.js'
 const app = express()
 const PORT = process.env.PORT || 8000
