@@ -1,6 +1,6 @@
 import express from "express"
 import { deleteTransaction, getTransaction, insertTransaction } from "../models/TransactionModel.js"
-import { auth } from "../middleware/Auth.js"
+import { auth } from "../middleware/auth.js"
 
 
 const router = express.Router()
@@ -13,9 +13,7 @@ router.post("/", async (req,res,next)=>{
          const user = req.userInfo
          const {_id} = user
          transaction.userId = _id
-         console.log(transaction)
          const result = await insertTransaction(transaction)
-         console.log(result)
          result?._id
            ? res.json({
                status: 'success',
@@ -55,7 +53,6 @@ router.get("/",  async (req,res,next)=>{
 router.delete("/", auth, async(req,res,next)=>{
   try {
     const userId = req.userInfo._id
-    console.log(req.body)
     const transIds = req.body
     const { deletedCount } = await deleteTransaction(userId, transIds)
     deletedCount>0?res.json({
